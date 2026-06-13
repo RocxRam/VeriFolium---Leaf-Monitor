@@ -42,7 +42,7 @@ function About() {
                 <p className="text-lg opacity-90">Training Images</p>
               </div>
               <div>
-                <div className="text-4xl font-bold mb-2">10+</div>
+                <div className="text-4xl font-bold mb-2">4</div>
                 <p className="text-lg opacity-90">Crop Varieties Supported</p>
               </div>
               <div>
