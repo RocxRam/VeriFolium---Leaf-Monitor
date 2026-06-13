@@ -116,43 +116,51 @@ function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="section-sm bg-white -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Our Team</h2>
-          <p className="text-lg text-neutral-600">College students aspiring AI engineers working together</p>
-        </div>
+{/* Team Section */}
+<section className="section-sm bg-white -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
+  <div className="text-center mb-12">
+    <h2 className="text-3xl font-bold mb-4">Our Team</h2>
+    <p className="text-lg text-neutral-600">
+      College students aspiring AI engineers working together
+    </p>
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Team Member 1 */}
-          <div className="text-center">
-            <div className="w-24 h-24 rounded-full gradient-primary center-flex mx-auto mb-4">
-              <span className="text-4xl">👨‍🌾</span>
-            </div>
-            <h3 className="font-bold text-lg">Mr. Harish Kumar M</h3>
-            <p className="text-sm text-primary-600 mb-2">Team Leader</p>
-            <p className="text-sm text-neutral-600">Programmer with 8+ years of experience</p>
-          </div>
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    
+    {/* Team Member 1 */}
+    <div className="text-center">
+      <div className="w-24 h-24 rounded-full gradient-primary center-flex mx-auto mb-4">
+        <span className="text-4xl">👨‍🌾</span>
+      </div>
+      <h3 className="font-bold text-lg">Mr. Harish Kumar M</h3>
+      <p className="text-sm text-primary-600 mb-2">Team Leader</p>
+      <p className="text-sm text-neutral-600">
+        Programmer with 8+ years of experience
+      </p>
+    </div>
 
-          {/* Team Member 2 */}
-          <div className="text-center">
-            <div className="w-24 h-24 rounded-full gradient-secondary center-flex mx-auto mb-4">
-              <span className="text-4xl">👩‍💻</span>
-            </div>
-            <h3 className="font-bold text-lg">Mr. Derek Jeremy Winkins</h3>
-            <p className="text-sm text-primary-600 mb-2">Team member</p>
-            <p className="text-sm text-neutral-600">Aspiring AI engineer</p>
-          </div>
+    {/* Team Member 2 */}
+    <div className="text-center">
+      <div className="w-24 h-24 rounded-full gradient-secondary center-flex mx-auto mb-4">
+        <span className="text-4xl">👩‍💻</span>
+      </div>
+      <h3 className="font-bold text-lg">Mr. Derek Jeremy Winkins</h3>
+      <p className="text-sm text-primary-600 mb-2">Team member</p>
+      <p className="text-sm text-neutral-600">Aspiring AI engineer</p>
+    </div>
 
-          {/* Team Member 3 */}
-          <div className="text-center">
-            <div className="w-24 h-24 rounded-full gradient-accent center-flex mx-auto mb-4">
-              <span className="text-4xl">👨‍🔧</span>
-            </div>
-            <h3 className="font-bold text-lg">Mr. Subrahmanian Ramakrishnan</h3>
-            <p className="text-sm text-primary-600 mb-2">Team member</p>
-            <p className="text-sm text-neutral-600">Aspiring Software Engineer</p>
-          </div>
+    {/* Team Member 3 */}
+    <div className="text-center">
+      <div className="w-24 h-24 rounded-full gradient-accent center-flex mx-auto mb-4">
+        <span className="text-4xl">👨‍🔧</span>
+      </div>
+      <h3 className="font-bold text-lg">Mr. Subrahmanian Ramakrishnan</h3>
+      <p className="text-sm text-primary-600 mb-2">Team member</p>
+      <p className="text-sm text-neutral-600">Aspiring Software Engineer</p>
+    </div>
+
+  </div>
+</section>
 
 
       {/* Technology Section */}
