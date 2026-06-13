@@ -34,15 +34,15 @@ function About() {
           <div className="gradient-primary rounded-lg p-8 text-white">
             <div className="space-y-6 text-center">
               <div>
-                <div className="text-4xl font-bold mb-2">98%</div>
+                <div className="text-4xl font-bold mb-2">90%</div>
                 <p className="text-lg opacity-90">Detection Accuracy</p>
               </div>
               <div>
                 <div className="text-4xl font-bold mb-2">50K+</div>
-                <p className="text-lg opacity-90">Active Farmers</p>
+                <p className="text-lg opacity-90">Training Images</p>
               </div>
               <div>
-                <div className="text-4xl font-bold mb-2">150+</div>
+                <div className="text-4xl font-bold mb-2">10+</div>
                 <p className="text-lg opacity-90">Crop Varieties Supported</p>
               </div>
               <div>
@@ -120,7 +120,7 @@ function About() {
       <section className="section-sm bg-white -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Our Team</h2>
-          <p className="text-lg text-neutral-600">Expert agriculturalists and AI engineers working together</p>
+          <p className="text-lg text-neutral-600">College students aspiring AI engineers working together</p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -129,9 +129,9 @@ function About() {
             <div className="w-24 h-24 rounded-full gradient-primary center-flex mx-auto mb-4">
               <span className="text-4xl">👨‍🌾</span>
             </div>
-            <h3 className="font-bold text-lg">Dr. Rajesh Kumar</h3>
-            <p className="text-sm text-primary-600 mb-2">Founder & CEO</p>
-            <p className="text-sm text-neutral-600">Agricultural scientist with 15+ years of experience</p>
+            <h3 className="font-bold text-lg">Mr. Harish Kumar M</h3>
+            <p className="text-sm text-primary-600 mb-2">Team Leader</p>
+            <p className="text-sm text-neutral-600">Programmer with 8+ years of experience</p>
           </div>
 
           {/* Team Member 2 */}
@@ -139,9 +139,9 @@ function About() {
             <div className="w-24 h-24 rounded-full gradient-secondary center-flex mx-auto mb-4">
               <span className="text-4xl">👩‍💻</span>
             </div>
-            <h3 className="font-bold text-lg">Priya Sharma</h3>
-            <p className="text-sm text-primary-600 mb-2">AI Lead</p>
-            <p className="text-sm text-neutral-600">Machine learning expert specializing in computer vision</p>
+            <h3 className="font-bold text-lg">Mr. Derek Jeremy Winkins</h3>
+            <p className="text-sm text-primary-600 mb-2">Team member</p>
+            <p className="text-sm text-neutral-600">Aspiring AI engineer</p>
           </div>
 
           {/* Team Member 3 */}
@@ -149,28 +149,17 @@ function About() {
             <div className="w-24 h-24 rounded-full gradient-accent center-flex mx-auto mb-4">
               <span className="text-4xl">👨‍🔧</span>
             </div>
-            <h3 className="font-bold text-lg">Arjun Singh</h3>
-            <p className="text-sm text-primary-600 mb-2">CTO</p>
-            <p className="text-sm text-neutral-600">Full-stack engineer with passion for scalable systems</p>
+            <h3 className="font-bold text-lg">Mr. Subrahmanian Ramakrishnan</h3>
+            <p className="text-sm text-primary-600 mb-2">Team member</p>
+            <p className="text-sm text-neutral-600">Aspiring Software Engineer</p>
           </div>
 
-          {/* Team Member 4 */}
-          <div className="text-center">
-            <div className="w-24 h-24 rounded-full gradient-primary center-flex mx-auto mb-4">
-              <span className="text-4xl">👩‍💼</span>
-            </div>
-            <h3 className="font-bold text-lg">Ananya Patel</h3>
-            <p className="text-sm text-primary-600 mb-2">Community Manager</p>
-            <p className="text-sm text-neutral-600">Dedicated to farmer support and global outreach</p>
-          </div>
-        </div>
-      </section>
 
       {/* Technology Section */}
       <section className="section-sm">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Technology Behind VeriFolium</h2>
-          <p className="text-lg text-neutral-600">Built with the latest advances in AI and cloud computing</p>
+          <p className="text-lg text-neutral-600">Built with the latest advances in AI technologies</p>
         </div>
 
         <div className="max-w-3xl mx-auto space-y-6">
@@ -196,7 +185,7 @@ function About() {
             <CardBody>
               <h3 className="font-bold text-lg mb-2">Real-time Processing</h3>
               <p className="text-neutral-600">
-                Get instant results on your mobile device, even in areas with limited connectivity.
+                Get instant results on your mobile device, even in rural areas.
               </p>
             </CardBody>
           </Card>
@@ -212,7 +201,7 @@ function About() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href={signup_path()} className="btn btn-primary btn-lg no-underline">
-              Get Started Free
+              Sign Up
             </Link>
             <Link href={login_path()} className="btn btn-outline btn-lg no-underline">
               Login to Account
