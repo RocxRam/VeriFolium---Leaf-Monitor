@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useForm, Link } from '@inertiajs/react'
+import { useForm, Link, usePage } from '@inertiajs/react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Card, { CardBody } from '../../components/Card'
@@ -7,12 +7,10 @@ import { Alert } from '../../components/Utils'
 
 interface Props {
   token: string
-  flash: {
-    alert?: string
-  }
 }
 
-export default function Edit({ token, flash }: Props) {
+export default function Edit({ token }: Props) {
+  const { flash } = usePage()
   const { data, setData, put, processing, errors } = useForm({
     password: '',
     password_confirmation: '',

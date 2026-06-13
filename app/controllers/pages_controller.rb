@@ -1,4 +1,4 @@
-class PagesController < ApplicationController
+class PagesController < InertiaController
   allow_unauthenticated_access
   def index
     render inertia: "Pages/Index"

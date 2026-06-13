@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
-  delete "logout", to: "sessions#delete"
+  delete "logout", to: "sessions#destroy"
   resources :passwords, param: :token
 
   # Redirect to localhost from 127.0.0.1 to use same IP address with Vite server

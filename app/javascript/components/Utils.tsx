@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from '@inertiajs/react'
 
 interface BadgeProps {
   variant?: 'primary' | 'success' | 'warning' | 'error'
@@ -102,14 +103,14 @@ export function Hero({
       {(primaryAction || secondaryAction) && (
         <div className={`flex gap-4 flex-wrap ${centered ? 'justify-center' : ''}`}>
           {primaryAction && (
-            <a href={primaryAction.href} className="btn btn-primary btn-lg no-underline">
+            <Link href={primaryAction.href} className="btn btn-primary btn-lg no-underline">
               {primaryAction.text}
-            </a>
+            </Link>
           )}
           {secondaryAction && (
-            <a href={secondaryAction.href} className="btn btn-outline btn-lg no-underline">
+            <Link href={secondaryAction.href} className="btn btn-outline btn-lg no-underline">
               {secondaryAction.text}
-            </a>
+            </Link>
           )}
         </div>
       )}

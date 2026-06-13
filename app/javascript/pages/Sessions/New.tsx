@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
-import { useForm, Link } from '@inertiajs/react'
+import { useForm, Link, usePage } from '@inertiajs/react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Card, { CardBody } from '../../components/Card'
 import { Alert } from '../../components/Utils'
+import { login_path } from '@/routes'
 
 interface Props {
-  flash: {
-    alert?: string
-    notice?: string
-  }
   email_address?: string
 }
 
-export default function New({ flash, email_address }: Props) {
+export default function New({ email_address }: Props) {
+  const { flash } = usePage();
   const { data, setData, post, processing, errors } = useForm({
     email_address: email_address || '',
     password: '',
@@ -23,7 +21,7 @@ export default function New({ flash, email_address }: Props) {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    post('/login')
+    post(login_path())
   }
 
   return (

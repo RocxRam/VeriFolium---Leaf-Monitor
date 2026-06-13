@@ -1,9 +1,9 @@
 import Layout from '../../components/Layout'
 import Card, { CardBody } from '../../components/Card'
 
-export default function About() {
+function About() {
   return (
-    <Layout>
+    <>
       {/* Hero Section */}
       <section className="section">
         <div className="text-center space-y-6">
@@ -218,6 +218,10 @@ export default function About() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   )
 }
+
+About.layout = (page) => <Layout>{page}</Layout>
+
+export default About

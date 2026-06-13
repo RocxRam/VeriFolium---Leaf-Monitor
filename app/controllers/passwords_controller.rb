@@ -1,11 +1,10 @@
-class PasswordsController < ApplicationController
+class PasswordsController < InertiaController
   allow_unauthenticated_access
   before_action :set_user_by_token, only: %i[ edit update ]
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to new_password_path, alert: "Try again later." }
 
   def new
     render inertia: "Passwords/New", props: {
-      flash: { alert: flash[:alert] },
       email_address: params[:email_address]
     }
   end
@@ -20,15 +19,14 @@ class PasswordsController < ApplicationController
 
   def edit
     render inertia: "Passwords/Edit", props: {
-      token: params[:token],
-      flash: { alert: flash[:alert] }
+      token: params[:token]
     }
   end
 
   def update
     if @user.update(params.permit(:password, :password_confirmation))
       @user.sessions.destroy_all
-      redirect_to new_session_path, notice: "Password has been reset."
+      redirect_to login_path, notice: "Password has been reset."
     else
       redirect_to edit_password_path(params[:token]), alert: "Passwords did not match."
     end

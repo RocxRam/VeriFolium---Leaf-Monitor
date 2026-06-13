@@ -1,10 +1,11 @@
 import Layout from '../../components/Layout'
-import { Hero, Alert } from '../../components/Utils'
+import { Hero } from '../../components/Utils'
 import Card, { CardBody } from '../../components/Card'
+import { about_path, login_path } from '@/routes'
 
-export default function Home() {
+function Index() {
   return (
-    <Layout>
+    <>
       {/* Hero Section */}
       <section className="section">
         <Hero
@@ -13,11 +14,11 @@ export default function Home() {
           description="Upload images of your affected crops and get instant AI-powered disease predictions with actionable recommendations to save your harvest."
           primaryAction={{
             text: 'Get Started',
-            href: '/login',
+            href: login_path(),
           }}
           secondaryAction={{
             text: 'Learn More',
-            href: '/about',
+            href: about_path(),
           }}
         />
       </section>
@@ -193,6 +194,10 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   )
 }
+
+Index.layout = (page) => <Layout>{page}</Layout>
+
+export default Index
