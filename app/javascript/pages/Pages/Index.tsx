@@ -187,7 +187,7 @@ function Index() {
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href={signup_path()} className="btn btn-primary btn-lg no-underline">
-              Create Free Account
+              Sign in
             </Link>
             <Link href={about_path()} className="btn btn-outline btn-lg no-underline">
               Learn More
