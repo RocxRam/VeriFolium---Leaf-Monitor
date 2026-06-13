@@ -14,7 +14,7 @@ class PasswordsController < InertiaController
       PasswordsMailer.reset(user).deliver_later
     end
 
-    redirect_to new_session_path, notice: "Password reset instructions sent (if user with that email address exists)."
+    redirect_to login_path, notice: "Password reset instructions sent (if user with that email address exists)."
   end
 
   def edit

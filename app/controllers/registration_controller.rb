@@ -1,5 +1,6 @@
 class RegistrationController < InertiaController
   allow_unauthenticated_access
+  before_action :redirect_authenticated_user, only: [:new]
 
   def new
     render inertia: "Registrations/New"
