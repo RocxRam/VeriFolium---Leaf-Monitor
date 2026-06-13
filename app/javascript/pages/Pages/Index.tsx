@@ -1,7 +1,8 @@
 import Layout from '../../components/Layout'
 import { Hero } from '../../components/Utils'
 import Card, { CardBody } from '../../components/Card'
-import { about_path, login_path } from '@/routes'
+import { about_path, login_path, signup_path } from '@/routes'
+import { Link } from '@inertiajs/react'
 
 function Index() {
   return (
@@ -185,12 +186,12 @@ function Index() {
             Join thousands of farmers using VeriFolium to improve crop health and increase yields.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/signup" className="btn btn-primary btn-lg no-underline">
+            <Link href={signup_path()} className="btn btn-primary btn-lg no-underline">
               Create Free Account
-            </a>
-            <a href="/about" className="btn btn-outline btn-lg no-underline">
+            </Link>
+            <Link href={about_path()} className="btn btn-outline btn-lg no-underline">
               Learn More
-            </a>
+            </Link>
           </div>
         </div>
       </section>

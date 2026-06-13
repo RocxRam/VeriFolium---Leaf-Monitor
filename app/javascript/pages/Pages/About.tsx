@@ -1,5 +1,7 @@
 import Layout from '../../components/Layout'
 import Card, { CardBody } from '../../components/Card'
+import { Link } from '@inertiajs/react'
+import { signup_path, login_path } from '@/routes'
 
 function About() {
   return (
@@ -209,12 +211,12 @@ function About() {
             Start using VeriFolium today and protect your crops with AI-powered insights.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <a href="/signup" className="btn btn-primary btn-lg no-underline">
+            <Link href={signup_path()} className="btn btn-primary btn-lg no-underline">
               Get Started Free
-            </a>
-            <a href="/login" className="btn btn-outline btn-lg no-underline">
+            </Link>
+            <Link href={login_path()} className="btn btn-outline btn-lg no-underline">
               Login to Account
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -222,6 +224,6 @@ function About() {
   )
 }
 
-About.layout = (page) => <Layout>{page}</Layout>
+About.layout = (page: React.ReactNode) => <Layout>{page}</Layout>
 
 export default About

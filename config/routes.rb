@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   root "pages#index"
   get "about", to: "pages#about"
+
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
+
+  get "signup", to: "registration#new"
+  post "signup", to: "registration#create"
+
   delete "logout", to: "sessions#destroy"
   resources :passwords, param: :token
 

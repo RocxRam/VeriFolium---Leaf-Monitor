@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@inertiajs/react'
+import { about_path } from '@/routes'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -48,7 +49,7 @@ export default function Footer() {
             <h5 className="font-semibold text-white mb-4">Company</h5>
             <ul className="space-y-2">
               <li>
-                <Link href="/about" className="text-neutral-400 hover:text-white transition-colors no-underline">
+                <Link href={about_path()} className="text-neutral-400 hover:text-white transition-colors no-underline">
                   About
                 </Link>
               </li>

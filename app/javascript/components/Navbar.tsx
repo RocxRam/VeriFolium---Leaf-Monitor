@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
-import { root_path, about_path, login_path, logout_path } from '@/routes'
+import { root_path, about_path, login_path, logout_path, signup_path } from '@/routes'
 
 interface NavbarProps {
   title?: string
@@ -60,7 +60,7 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
                 <Link href={login_path()} className="btn btn-outline btn-sm no-underline">
                   Login
                 </Link>
-                <Link href="/signup" className="btn btn-primary btn-sm no-underline">
+                <Link href={signup_path()} className="btn btn-primary btn-sm no-underline">
                   Sign Up
                 </Link>
               </>
@@ -109,7 +109,7 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
                     Login
                   </Link>
                   <Link
-                    href="/signup"
+                    href={signup_path()}
                     className="block px-4 py-2 text-primary-600 hover:bg-primary-50 rounded-lg font-medium no-underline"
                     onClick={() => setMobileMenuOpen(false)}
                   >
