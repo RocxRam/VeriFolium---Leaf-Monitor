@@ -1,6 +1,6 @@
 import Layout from '../../components/Layout'
 import Card, { CardBody } from '../../components/Card'
-import { edit_profile_path } from '@/routes'
+import { edit_profile_path, new_scan_path } from '@/routes'
 import { Link } from '@inertiajs/react'
 
 interface Profile {
@@ -10,11 +10,18 @@ interface Profile {
   location: string | null
 }
 
-interface DashboardProps {
-  profile: Profile | null
+interface Scan {
+  id: number
+  disease_name: string
+  created_at: string
 }
 
-function Index({ profile }: DashboardProps) {
+interface DashboardProps {
+  profile: Profile | null
+  scans: Scan[]
+}
+
+function Index({ profile, scans }: DashboardProps) {
   return (
     <>
       <div className="flex justify-between items-center mb-8">
@@ -69,16 +76,33 @@ function Index({ profile }: DashboardProps) {
               <span className="w-10 h-10 rounded-lg gradient-secondary center-flex text-xl shadow-sm">🔍</span>
               Recent Diagnoses
             </h2>
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-neutral-100 center-flex text-3xl mb-4 opacity-50">📋</div>
-              <p className="text-neutral-500 max-w-[200px]">
-                No recent diagnoses found. Start scanning your crops to see insights here.
-              </p>
-            </div>
+            {scans.length > 0 ? (
+              <div className="space-y-3 mb-6">
+                {scans.map((scan) => (
+                  <Link
+                    key={scan.id}
+                    href={`/scans/${scan.id}`}
+                    className="block p-3 bg-neutral-50 rounded-xl border border-neutral-100 hover:border-primary-200 transition-colors no-underline"
+                  >
+                    <div className="font-semibold text-neutral-800">{scan.disease_name}</div>
+                    <div className="text-xs text-neutral-500">
+                      {new Date(scan.created_at).toLocaleDateString()}
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-neutral-100 center-flex text-3xl mb-4 opacity-50">📋</div>
+                <p className="text-neutral-500 max-w-[200px]">
+                  No recent diagnoses found. Start scanning your crops to see insights here.
+                </p>
+              </div>
+            )}
             <div className="mt-auto">
-              <button className="btn btn-primary btn-full opacity-50 cursor-not-allowed" disabled title="Coming soon!">
+              <Link href={new_scan_path()} className="btn btn-primary btn-full no-underline">
                 New Scan
-              </button>
+              </Link>
             </div>
           </CardBody>
         </Card>

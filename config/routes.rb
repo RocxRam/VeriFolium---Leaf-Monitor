@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "pages#index"
   get "dashboard", to: "dashboard#index"
   resource :profile, only: [ :edit, :update ]
+  resources :scans, only: [ :new, :create, :show ]
 
   get "about", to: "pages#about"
   get "about/team", to: "pages#team"
