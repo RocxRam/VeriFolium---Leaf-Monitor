@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
   root "pages#index"
   get "dashboard", to: "dashboard#index"
+  get "dashboard/weather", to: "dashboard#weather"
   resource :profile, only: [ :edit, :update ]
   resources :scans, only: [ :new, :create, :show ]
 
   get "about", to: "pages#about"
   get "about/team", to: "pages#team"
   get "about/technology", to: "pages#technology"
+<<<<<<< Updated upstream
+=======
+  get "inference", to: "pages#inference"
+>>>>>>> Stashed changes
 
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"

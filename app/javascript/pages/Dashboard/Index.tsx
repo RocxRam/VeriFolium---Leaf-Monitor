@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import Layout from '../../components/Layout'
 import Card, { CardBody } from '../../components/Card'
 import { edit_profile_path, new_scan_path } from '@/routes'
@@ -21,7 +22,56 @@ interface DashboardProps {
   scans: Scan[]
 }
 
+const weatherEmoji = (description: string) => {
+  const value = description.toLowerCase()
+  if (value.includes('thunder')) return '⛈️'
+  if (value.includes('drizzle')) return '🌦️'
+  if (value.includes('rain')) return '🌧️'
+  if (value.includes('snow')) return '❄️'
+  if (value.includes('mist') || value.includes('fog') || value.includes('haze')) return '🌫️'
+  if (value.includes('clear')) return '☀️'
+  if (value.includes('cloud')) return '☁️'
+  if (value.includes('smoke') || value.includes('dust') || value.includes('sand') || value.includes('ash')) return '🌪️'
+  return '🌤️'
+}
+
 function Index({ profile, scans }: DashboardProps) {
+  const [weather, setWeather] = useState<{ today: any; tomorrow: any } | null>(null)
+  const [weatherError, setWeatherError] = useState<string | null>(null)
+  const [loadingWeather, setLoadingWeather] = useState(false)
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setWeatherError('Geolocation is not supported in this browser.')
+      return
+    }
+
+    setLoadingWeather(true)
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const { latitude, longitude } = position.coords
+          const response = await fetch(`/dashboard/weather?lat=${latitude}&lon=${longitude}`)
+          if (!response.ok) {
+            const payload = await response.json()
+            throw new Error(payload.error || 'Unable to fetch weather')
+          }
+          const payload = await response.json()
+          setWeather(payload)
+        } catch (error: any) {
+          setWeatherError(error?.message || 'Unable to load weather')
+        } finally {
+          setLoadingWeather(false)
+        }
+      },
+      (error) => {
+        setWeatherError(error.message || 'Permission denied for location')
+        setLoadingWeather(false)
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 600000 },
+    )
+  }, [])
+
   return (
     <>
       <div className="flex justify-between items-center mb-8">
@@ -113,12 +163,46 @@ function Index({ profile, scans }: DashboardProps) {
               <span className="w-10 h-10 rounded-lg gradient-accent center-flex text-xl shadow-sm">🌡️</span>
               Local Conditions
             </h2>
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <div className="w-16 h-16 rounded-full bg-neutral-100 center-flex text-3xl mb-4 opacity-50">☁️</div>
-              <p className="text-neutral-500 max-w-[200px] italic">
-                Connect your location to see real-time weather and soil conditions.
-              </p>
-            </div>
+            {loadingWeather ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-neutral-100 center-flex text-3xl mb-4 animate-pulse">⏳</div>
+                <p className="text-neutral-500">Loading weather for your location…</p>
+              </div>
+            ) : weather ? (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="p-4 bg-slate-950/90 rounded-3xl border border-neutral-800">
+                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Today</p>
+                    <p className="text-3xl font-bold mt-3">{weatherEmoji(weather.today.description)} {Math.round(weather.today.temp)}°C</p>
+                    <p className="text-sm text-slate-300 capitalize">{weather.today.description}</p>
+                    <p className="text-sm text-slate-400 mt-2">Feels like {Math.round(weather.today.feels_like)}°C</p>
+                  </div>
+                  <div className="p-4 bg-slate-950/90 rounded-3xl border border-neutral-800">
+                    <p className="text-sm uppercase tracking-[0.2em] text-slate-400">Tomorrow</p>
+                    <p className="text-3xl font-bold mt-3">{weatherEmoji(weather.tomorrow.description)} {Math.round(weather.tomorrow.max)}° / {Math.round(weather.tomorrow.min)}°</p>
+                    <p className="text-sm text-slate-300 capitalize">{weather.tomorrow.description}</p>
+                    <p className="text-sm text-slate-400 mt-2">Humidity {weather.tomorrow.humidity}%</p>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4 text-sm text-slate-400">
+                  <div className="rounded-3xl bg-neutral-950/90 p-4 border border-neutral-800">
+                    <p className="font-semibold text-slate-200 mb-2">Wind Speed</p>
+                    <p>{weather.today.wind_speed} m/s</p>
+                  </div>
+                  <div className="rounded-3xl bg-neutral-950/90 p-4 border border-neutral-800">
+                    <p className="font-semibold text-slate-200 mb-2">Humidity</p>
+                    <p>{weather.today.humidity}%</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="w-16 h-16 rounded-full bg-neutral-100 center-flex text-3xl mb-4 opacity-50">☁️</div>
+                <p className="text-neutral-500 max-w-[200px] italic">
+                  {weatherError || 'Connect your location to see real-time weather conditions.'}
+                </p>
+              </div>
+            )}
           </CardBody>
         </Card>
       </div>
