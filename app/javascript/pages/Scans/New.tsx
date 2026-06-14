@@ -1,13 +1,33 @@
 import Layout from '../../components/Layout'
 import Card, { CardBody } from '../../components/Card'
 import { useForm } from '@inertiajs/react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import useInferenceWorker from '../../hooks/useInferenceWorker'
+import { scans_path } from '@/routes'
 
 function New() {
   const { data, setData, post, processing, errors } = useForm({
     image: null as File | null,
+    disease_name: '',
+    confidence_score: 0,
   })
   const [preview, setPreview] = useState<string | null>(null)
+  const [inferencing, setInferencing] = useState(false)
+  
+  const LABELS = [
+    "Wheat_Aphid", "Wheat_BlackRust", "Wheat_Blast", "Wheat_BrownRust", "Wheat_CommonRootRot", 
+    "Wheat_FusariumHeadBlight", "Wheat_LeafBlight", "Wheat_Mildew", "Wheat_Mite", "Wheat_Septoria", 
+    "Wheat_Smut", "Wheat_Stemfly", "Wheat_Tanspot", "Wheat_YellowRust", "Wheat_Healthy",
+    "Rice_BrownSpot", "Rice_Hispa", "Rice_LeafBlast", "Rice_Healthy",
+    "Potato_Early_Blight", "Potato_Late_Blight", "Potato_Healthy",
+    "Corn_Common_Rust", "Corn_Gray_Leaf_Spot", "Corn_Northern_Leaf_Blight", "Corn_Healthy"
+  ];
+
+  const { ready, warmup, predictImage } = useInferenceWorker('/ml_models/my_model/model.json')
+
+  useEffect(() => {
+    if (ready) warmup().catch(() => {})
+  }, [ready, warmup])
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -17,9 +37,50 @@ function New() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    post('/scans')
+    if (!data.image) return
+
+    setInferencing(true)
+    try {
+      const bitmap = await createImageBitmap(data.image)
+      const result = await predictImage(bitmap, 224, 224) 
+      const logits = result[0].data;
+
+      // Apply Softmax to convert logits to probabilities
+      const maxLogit = Math.max(...logits);
+      const scores = logits.map(l => Math.exp(l - maxLogit));
+      const sum = scores.reduce((a, b) => a + b, 0);
+      const probabilities = scores.map(s => s / sum);
+
+      // Find the highest probability
+      let maxIdx = 0;
+      let maxProb = -1;
+      for (let i = 0; i < probabilities.length; i++) {
+        if (probabilities[i] > maxProb) {
+          maxProb = probabilities[i];
+          maxIdx = i;
+        }
+      }
+
+      console.log('Detected Index:', maxIdx, 'Confidence:', maxProb);
+
+      // Update state
+      setData({
+        ...data,
+        disease_name: LABELS[maxIdx] || `Unknown (${maxIdx})`,
+        confidence_score: maxProb
+      })
+
+      // Submit using internal form state
+      setTimeout(() => {
+        post(scans_path())
+      }, 0)
+    } catch (error) {
+      console.error('Inference failed', error)
+      alert('Local inference failed. Please try again.')
+      setInferencing(false)
+    }
   }
 
   return (
@@ -49,10 +110,11 @@ function New() {
             <button
               type="submit"
               className="btn btn-primary btn-full"
-              disabled={processing || !data.image}
+              disabled={processing || !data.image || !ready || inferencing}
             >
-              {processing ? 'Analyzing...' : 'Diagnose Disease'}
+              {processing || inferencing ? 'Processing...' : 'Diagnose Disease'}
             </button>
+            {!ready && <p className="text-sm text-neutral-500 text-center">Loading model...</p>}
           </form>
         </CardBody>
       </Card>

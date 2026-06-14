@@ -21,6 +21,6 @@ class ScansController < InertiaController
   private
 
   def scan_params
-    params.permit(:image)
+    params.permit(:image, :disease_name, :confidence_score)
   end
 end
