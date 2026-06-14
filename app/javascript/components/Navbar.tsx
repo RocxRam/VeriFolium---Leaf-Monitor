@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
 import { root_path, about_path, about_team_path, about_technology_path, login_path, logout_path, signup_path, dashboard_path } from '@/routes'
 
@@ -34,11 +34,16 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
             <Link href={about_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
               About
             </Link>
+<<<<<<< Updated upstream
             <Link href={about_team_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
               Team
             </Link>
             <Link href={about_technology_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
               Technology
+=======
+            <Link href="/inference" className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
+              Inference
+>>>>>>> Stashed changes
             </Link>
             {auth.user && (
               <Link href={dashboard_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
@@ -100,6 +105,7 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
                 About
               </Link>
               <Link
+<<<<<<< Updated upstream
                 href={about_team_path()}
                 className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
                 onClick={() => setMobileMenuOpen(false)}
@@ -112,6 +118,13 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Technology
+=======
+                href="/inference"
+                className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Inference
+>>>>>>> Stashed changes
               </Link>
               {auth.user && (
                 <>

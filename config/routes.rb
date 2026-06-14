@@ -5,8 +5,12 @@ Rails.application.routes.draw do
   resources :scans, only: [ :new, :create, :show ]
 
   get "about", to: "pages#about"
+<<<<<<< Updated upstream
   get "about/team", to: "pages#team"
   get "about/technology", to: "pages#technology"
+=======
+  get "inference", to: "pages#inference"
+>>>>>>> Stashed changes
 
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
