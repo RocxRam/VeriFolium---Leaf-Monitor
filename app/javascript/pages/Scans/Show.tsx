@@ -20,7 +20,7 @@ function Show({ scan }: { scan: Scan }) {
             <p className="text-2xl font-bold text-primary-600">{scan.disease_name}</p>
           </div>
           <div>
-            <h2 className="text-xl font-bold text-neutral-500">Confidence</h2>
+            <h2 className="text-xl font-bold text-neutral-500">Confidence (local inference)</h2>
             <p className="text-lg font-semibold text-neutral-800">{(scan.confidence_score * 100).toFixed(2)}%</p>
           </div>
           <div>

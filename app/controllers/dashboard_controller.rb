@@ -3,7 +3,6 @@ class DashboardController < InertiaController
     render inertia: "Dashboard/Index", props: {
       profile: Current.user.profile,
       scans: Current.user.scans.order(created_at: :desc).limit(5)
-      # Weather API info, use Rails.application.credentials.dig(:openweather_api_key)
     }
   end
 
@@ -21,39 +20,51 @@ class DashboardController < InertiaController
       return
     end
 
-    url = URI("https://api.openweathermap.org/data/2.5/onecall")
-    url.query = URI.encode_www_form(
-      lat: lat,
-      lon: lon,
-      exclude: "minutely,hourly,alerts",
-      units: "metric",
-      appid: api_key,
-    )
+    # 1. Fetch Current Weather
+    current_url = URI("https://api.openweathermap.org/data/2.5/weather")
+    current_url.query = URI.encode_www_form(lat: lat, lon: lon, units: "metric", appid: api_key.strip)
 
-    response = Net::HTTP.get_response(url)
-    if response.is_a?(Net::HTTPSuccess)
-      payload = JSON.parse(response.body)
-      today = payload.dig("current")
-      tomorrow = payload.dig("daily", 1)
+    # 2. Fetch 5-Day Forecast
+    forecast_url = URI("https://api.openweathermap.org/data/2.5/forecast")
+    forecast_url.query = URI.encode_www_form(lat: lat, lon: lon, units: "metric", appid: api_key.strip)
+
+    def fetch_api(uri)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      http.request(Net::HTTP::Get.new(uri))
+    end
+    curr_res = fetch_api(current_url)
+    fore_res = fetch_api(forecast_url)
+
+    if curr_res.is_a?(Net::HTTPSuccess) && fore_res.is_a?(Net::HTTPSuccess)
+      curr_data = JSON.parse(curr_res.body)
+      fore_data = JSON.parse(fore_res.body)
+
+      # Forecast returns 3-hour intervals, taking the first item of next day (~24h ahead)
+      # Safely access the list to avoid 502 if forecast is unavailable
+      tomorrow_data = fore_data.dig("list", 8) || {}
+
       render json: {
         today: {
-          temp: today["temp"],
-          feels_like: today["feels_like"],
-          description: today.dig("weather", 0, "description"),
-          icon: today.dig("weather", 0, "icon"),
-          humidity: today["humidity"],
-          wind_speed: today["wind_speed"],
+          temp: curr_data.dig("main", "temp"),
+          feels_like: curr_data.dig("main", "feels_like"),
+          description: curr_data.dig("weather", 0, "description"),
+          icon: curr_data.dig("weather", 0, "icon"),
+          humidity: curr_data.dig("main", "humidity"),
+          wind_speed: curr_data.dig("wind", "speed")
         },
         tomorrow: {
-          min: tomorrow.dig("temp", "min"),
-          max: tomorrow.dig("temp", "max"),
-          description: tomorrow.dig("weather", 0, "description"),
-          icon: tomorrow.dig("weather", 0, "icon"),
-          humidity: tomorrow["humidity"],
-          wind_speed: tomorrow["wind_speed"],
-        },
+          min: tomorrow_data.dig("main", "temp_min"),
+          max: tomorrow_data.dig("main", "temp_max"),
+          description: tomorrow_data.dig("weather", 0, "description"),
+          icon: tomorrow_data.dig("weather", 0, "icon"),
+          humidity: tomorrow_data.dig("main", "humidity"),
+          wind_speed: tomorrow_data.dig("wind", "speed")
+        }
       }
     else
+      Rails.logger.error "Weather API Error: Curr: #{curr_res.code}, Fore: #{fore_res.code}"
       render json: { error: "Unable to fetch weather data" }, status: :bad_gateway
     end
   end

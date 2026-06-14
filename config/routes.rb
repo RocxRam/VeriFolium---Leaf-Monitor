@@ -8,10 +8,6 @@ Rails.application.routes.draw do
   get "about", to: "pages#about"
   get "about/team", to: "pages#team"
   get "about/technology", to: "pages#technology"
-<<<<<<< Updated upstream
-=======
-  get "inference", to: "pages#inference"
->>>>>>> Stashed changes
 
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
