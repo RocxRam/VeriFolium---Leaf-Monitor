@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
-import { root_path, about_path, login_path, logout_path, signup_path } from '@/routes'
+import { root_path, about_path, about_team_path, about_technology_path, login_path, logout_path, signup_path } from '@/routes'
 
 interface NavbarProps {
   title?: string
@@ -33,6 +33,12 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
           <div className="hidden md:flex items-center gap-8">
             <Link href={about_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
               About
+            </Link>
+            <Link href={about_team_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
+              Team
+            </Link>
+            <Link href={about_technology_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
+              Technology
             </Link>
             {auth.user && (
               <Link href="/dashboard" className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
@@ -93,14 +99,39 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
               >
                 About
               </Link>
+              <Link
+                href={about_team_path()}
+                className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Team
+              </Link>
+              <Link
+                href={about_technology_path()}
+                className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Technology
+              </Link>
               {auth.user && (
-                <Link
-                  href="/dashboard"
-                  className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Dashboard
+                  </Link>
+                  <Link
+                    href={logout_path()}
+                    method="delete"
+                    as="button"
+                    className="block w-full text-left px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Logout
+                  </Link>
+                </>
               )}
               {!auth.user && (
                 <>

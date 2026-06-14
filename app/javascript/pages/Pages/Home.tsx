@@ -12,8 +12,8 @@ function Home() {
           title="From Field Images to Confident Decisions"
           subtitle="About VeriFolium"
           description="We empower farmers with AI-driven crop disease detection, clear treatment guidance, and a smooth path to healthier harvests."
-          primaryAction={{ text: 'Create Account', href: '/signup' }}
-          secondaryAction={{ text: 'Login', href: '/login' }}
+          primaryAction={{ text: 'Create Account', href: signup_path() }}
+          secondaryAction={{ text: 'Login', href: login_path() }}
         />
       </section>
 
@@ -124,7 +124,7 @@ function Home() {
           <p className="text-lg text-neutral-600 mb-8 max-w-2xl mx-auto">Start using VeriFolium today and protect your crops with AI-powered insights.</p>
           <div className="flex gap-4 justify-center flex-wrap">
             <Link href={signup_path()} className="btn btn-primary btn-lg no-underline">Sign Up</Link>
-            <Link href={login_path()} className="btn btn-outline btn-lg no-underline">Login to Account</Link>
+            <Link href={login_path()} className="btn btn-outline btn-lg no-underline">Login</Link>
           </div>
         </div>
       </section>

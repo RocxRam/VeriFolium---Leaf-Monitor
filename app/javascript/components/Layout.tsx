@@ -28,8 +28,10 @@ export default function Layout({
       <LoadingBar />
       <FallingLeaves />
       <div style={{ position: 'relative', zIndex: 10 }}>
-        <Navbar user={user} title={title} />
+        <Navbar title={title} />
         <main className="flex-1 py-10 md:py-14">
+          {fullWidth ? children : <div className="container-app">{children}</div>}
+        </main>
       </div>
     </div>
   )

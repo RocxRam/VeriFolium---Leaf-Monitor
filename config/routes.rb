@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "pages#index"
-  get "about", to: "pages#about"
+  get "about", to: "pages#home"
+  get "about/team", to: "pages#team"
+  get "about/technology", to: "pages#technology"
 
   get "login", to: "sessions#new"
   post "login", to: "sessions#create"
