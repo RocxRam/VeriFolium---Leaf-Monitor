@@ -8,6 +8,7 @@ interface Profile {
   crops: string | null
   soil_type: string | null
   location: string | null
+  preferred_language: string | null
 }
 
 interface EditProps {
@@ -20,6 +21,7 @@ function Edit({ profile }: EditProps) {
     crops: profile.crops || '',
     soil_type: profile.soil_type || '',
     location: profile.location || '',
+    preferred_language: profile.preferred_language || 'English',
   })
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -104,6 +106,19 @@ function Edit({ profile }: EditProps) {
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400">📍</span>
               </div>
               {errors.location && <div className="form-error">{errors.location}</div>}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="preferred_language" className="form-label">Preferred Language</label>
+              <input
+                id="preferred_language"
+                type="text"
+                className="form-input"
+                placeholder="e.g. English, Spanish, Tamil..."
+                value={data.preferred_language || ''}
+                onChange={e => setData('preferred_language', e.target.value)}
+              />
+              {errors.preferred_language && <div className="form-error">{errors.preferred_language}</div>}
             </div>
 
             <div className="flex justify-end gap-4 pt-6 border-t border-neutral-100">

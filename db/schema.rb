@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_14_014721) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_14_054652) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -98,6 +98,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_14_014721) do
     t.text "crops"
     t.decimal "land_size", precision: 10, scale: 2
     t.string "location"
+    t.string "preferred_language"
     t.string "soil_type"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false

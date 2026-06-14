@@ -3,6 +3,7 @@ import { Hero } from '../../components/Utils'
 import Card, { CardBody } from '../../components/Card'
 import { about_path, login_path, signup_path } from '@/routes'
 import { Link } from '@inertiajs/react'
+import cropImage from '../../assets/crop_image.png'
 
 function Index() {
   return (
@@ -13,6 +14,8 @@ function Index() {
           title="Protect Your Crops with AI"
           subtitle="Smart Disease Detection"
           description="Upload images of your affected crops and get instant AI-powered disease predictions with actionable recommendations to save your harvest."
+          image={cropImage}
+          imageAlt="Crop disease detection"
           primaryAction={{
             text: 'Get Started',
             href: login_path(),

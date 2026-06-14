@@ -20,6 +20,6 @@ class ProfilesController < InertiaController
   private
 
   def profile_params
-    params.expect(profile: [ :land_size, :crops, :soil_type, :location ])
+    params.expect(profile: [ :land_size, :crops, :soil_type, :location, :preferred_language ])
   end
 end

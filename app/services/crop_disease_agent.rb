@@ -24,6 +24,7 @@ class CropDiseaseAgent
       own inference there.
 
       Please verify this diagnosis, provide a final assessment, and suggest remedies.
+      Respond in #{profile&.preferred_language || 'English'}.
       Provide:
       1. Verified Disease Name
       2. Final Confidence Score (0.0 to 1.0)

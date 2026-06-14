@@ -3,6 +3,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import FallingLeaves from './FallingLeaves'
 import LoadingBar from './LoadingBar'
+import GoogleTranslateWidget from './GoogleTranslateWidget'
 
 interface LayoutProps {
   children: React.ReactNode

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
 import { root_path, about_path, about_team_path, about_technology_path, login_path, logout_path, signup_path, dashboard_path } from '@/routes'
+import GoogleTranslateWidget from './GoogleTranslateWidget'
 
 interface NavbarProps {
   title?: string
@@ -45,6 +46,9 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
                 Dashboard
               </Link>
             )}
+            <div className="pl-4 border-l border-neutral-200">
+              <GoogleTranslateWidget />
+            </div>
           </div>
 
           {/* Auth Links */}
