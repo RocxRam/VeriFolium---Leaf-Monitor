@@ -15,15 +15,18 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
   }
 
   return (
-    <nav className="bg-white border-b border-neutral-200 shadow-sm sticky top-0 z-40">
+    <nav className="bg-white/90 border border-white/70 backdrop-blur-xl shadow-[0_20px_60px_-30px_rgba(15,23,42,0.25)] sticky top-0 z-40">
       <div className="container-app">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href={root_path()} className="flex items-center gap-2 no-underline">
-            <div className="w-10 h-10 gradient-primary rounded-lg center-flex">
+          <Link href={root_path()} className="flex items-center gap-3 no-underline">
+            <div className="w-11 h-11 gradient-primary rounded-2xl center-flex shadow-lg">
               <span className="text-white font-bold text-lg">🌿</span>
             </div>
-            <span className="font-bold text-xl text-neutral-900 hidden sm:inline">{title}</span>
+            <div>
+              <span className="font-bold text-xl text-slate-900 block">{title}</span>
+              <span className="text-xs text-neutral-500 uppercase tracking-[0.15em]">Crop health intelligence</span>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

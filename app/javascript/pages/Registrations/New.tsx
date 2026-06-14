@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useForm, Link, usePage } from '@inertiajs/react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Card, { CardBody } from '../../components/Card'
+import AuthBackground from '../../components/AuthBackground'
 import { Alert } from '../../components/Utils'
 import { signup_path, login_path, root_path } from '@/routes'
 
 export default function New() {
-  const { props } = usePage<any>();
-  const { flash } = props;
+  const { flash } = usePage().props as any
   const { data, setData, post, processing, errors } = useForm({
     email_address: '',
     password: '',
     password_confirmation: '',
   })
-
-  const [showPassword, setShowPassword] = useState(false)
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,18 +21,24 @@ export default function New() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center px-4 py-8">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center px-4 py-10">
+      <AuthBackground />
       <div className="w-full max-w-md">
         {/* Logo and Title */}
-        <div className="text-center mb-8">
-          <Link href={root_path()} className="flex items-center justify-center gap-2 mb-4 no-underline">
-            <div className="w-12 h-12 gradient-primary rounded-lg center-flex">
+        <div className="text-center mb-10">
+          <Link href={root_path()} className="inline-flex items-center justify-center gap-3 mb-4 no-underline">
+            <div className="w-14 h-14 gradient-primary rounded-2xl center-flex shadow-xl">
               <span className="text-white font-bold text-xl">🌿</span>
             </div>
-            <span className="font-bold text-2xl text-neutral-900">VeriFolium</span>
+            <div>
+              <span className="font-bold text-2xl text-slate-900 block">VeriFolium</span>
+              <span className="text-sm text-neutral-500">Crop intelligence for modern farms</span>
+            </div>
           </Link>
-          <h1 className="text-3xl font-bold text-neutral-900 mb-2">Create Account</h1>
-          <p className="text-neutral-600">Join VeriFolium to start diagnosing your crops</p>
+          <h1 className="text-4xl font-bold text-slate-900 mb-3">Create your account</h1>
+          <p className="text-neutral-600 text-base max-w-xl mx-auto">
+            Start diagnosing crop health instantly, with trusted AI recommendations designed for farmers.
+          </p>
         </div>
 
         {/* Alerts */}
@@ -65,7 +69,7 @@ export default function New() {
 
               {/* Password Field */}
               <Input
-                type={showPassword ? 'text' : 'password'}
+                type="password"
                 label="Password"
                 placeholder="Create a password"
                 value={data.password}
@@ -77,7 +81,7 @@ export default function New() {
 
               {/* Password Confirmation Field */}
               <Input
-                type={showPassword ? 'text' : 'password'}
+                type="password"
                 label="Confirm Password"
                 placeholder="Confirm your password"
                 value={data.password_confirmation}

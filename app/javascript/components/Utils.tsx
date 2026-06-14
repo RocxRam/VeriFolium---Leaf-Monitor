@@ -98,7 +98,7 @@ export function Hero({
   const content = (
     <div className={`space-y-6 ${centered ? 'text-center' : ''}`}>
       {subtitle && <p className="text-primary-600 font-semibold uppercase tracking-wide text-sm">{subtitle}</p>}
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">{title}</h1>
+      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-slate-900">{title}</h1>
       {description && <p className="text-lg text-neutral-600 max-w-2xl mx-auto">{description}</p>}
       {(primaryAction || secondaryAction) && (
         <div className={`flex gap-4 flex-wrap ${centered ? 'justify-center' : ''}`}>
@@ -117,16 +117,35 @@ export function Hero({
     </div>
   )
 
+  const wrapperClasses = `relative overflow-hidden ${centered ? 'text-center' : ''}`
+  const innerClasses = 'relative glass p-8 md:p-12 rounded-[2rem] shadow-2xl border border-white/70'
+
   if (image) {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div>{content}</div>
-        <div className="order-first md:order-last">
-          <img src={image} alt={imageAlt} className="w-full h-auto rounded-lg shadow-lg" />
+      <div className={wrapperClasses}>
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-primary-200/40 blur-3xl" />
+          <div className="absolute top-16 right-0 h-56 w-56 rounded-full bg-secondary-200/30 blur-3xl" />
+        </div>
+        <div className={innerClasses}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div>{content}</div>
+            <div className="order-first md:order-last">
+              <img src={image} alt={imageAlt} className="w-full h-auto rounded-[1.5rem] shadow-xl" />
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
-  return content
+  return (
+    <div className={wrapperClasses}>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute -top-10 -left-10 h-40 w-40 rounded-full bg-primary-200/40 blur-3xl" />
+        <div className="absolute bottom-0 right-12 h-56 w-56 rounded-full bg-secondary-200/30 blur-3xl" />
+      </div>
+      <div className={innerClasses}>{content}</div>
+    </div>
+  )
 }

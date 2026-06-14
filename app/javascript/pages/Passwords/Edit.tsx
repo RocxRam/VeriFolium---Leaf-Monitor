@@ -3,6 +3,7 @@ import { useForm, Link, usePage } from '@inertiajs/react'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 import Card, { CardBody } from '../../components/Card'
+import AuthBackground from '../../components/AuthBackground'
 import { Alert } from '../../components/Utils'
 
 interface Props {
@@ -48,18 +49,24 @@ export default function Edit({ token }: Props) {
   const strength = passwordStrength(data.password)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center px-4 py-8">
+    <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-primary-50 via-white to-secondary-50 flex items-center justify-center px-4 py-10">
+      <AuthBackground />
       <div className="w-full max-w-md">
         {/* Logo and Title */}
-        <div className="text-center mb-8">
-          <Link href="/" className="flex items-center justify-center gap-2 mb-4 no-underline">
-            <div className="w-12 h-12 gradient-primary rounded-lg center-flex">
+        <div className="text-center mb-10">
+          <Link href="/" className="inline-flex items-center justify-center gap-3 mb-4 no-underline">
+            <div className="w-14 h-14 gradient-primary rounded-2xl center-flex shadow-xl">
               <span className="text-white font-bold text-xl">🌿</span>
             </div>
-            <span className="font-bold text-2xl text-neutral-900">VeriFolium</span>
+            <div>
+              <span className="font-bold text-2xl text-slate-900 block">VeriFolium</span>
+              <span className="text-sm text-neutral-500">Secure your account with confidence</span>
+            </div>
           </Link>
-          <h1 className="text-3xl font-bold text-neutral-900 mb-2">Set New Password</h1>
-          <p className="text-neutral-600">Create a strong password to secure your account</p>
+          <h1 className="text-4xl font-bold text-slate-900 mb-3">Create a stronger password</h1>
+          <p className="text-neutral-600 text-base max-w-xl mx-auto">
+            Choose a secure password that keeps your crop insights safe and your team confident.
+          </p>
         </div>
 
         {/* Alerts */}

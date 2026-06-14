@@ -6,18 +6,21 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-neutral-900 text-neutral-300 mt-auto">
+    <footer className="bg-neutral-950 text-neutral-300 mt-auto border-t border-neutral-800">
       <div className="container-app py-12 md:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 gradient-primary rounded-lg center-flex">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-11 h-11 gradient-primary rounded-2xl center-flex shadow-lg">
                 <span className="text-white font-bold text-lg">🌿</span>
               </div>
-              <span className="font-bold text-lg text-white">VeriFolium</span>
+              <div>
+                <span className="font-bold text-lg text-white block">VeriFolium</span>
+                <span className="text-xs text-neutral-500 uppercase tracking-[0.18em]">Modern crop intelligence</span>
+              </div>
             </div>
-            <p className="text-sm text-neutral-400">
+            <p className="text-sm text-neutral-400 max-w-xs">
               AI-powered crop disease detection and recommendations for sustainable farming.
             </p>
           </div>
