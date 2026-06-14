@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react'
 import { signup_path, login_path } from '@/routes'
 import { Hero } from '../../components/Utils'
 
-function Home() {
+function About() {
   return (
     <>
       <section className="section">
@@ -132,6 +132,6 @@ function Home() {
   )
 }
 
-Home.layout = (page: React.ReactNode) => <Layout>{page}</Layout>
+About.layout = (page: React.ReactNode) => <Layout>{page}</Layout>
 
-export default Home
+export default About

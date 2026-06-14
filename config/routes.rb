@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root "pages#index"
-  get "about", to: "pages#home"
+  get "dashboard", to: "dashboard#index"
+  resource :profile, only: [ :edit, :update ]
+
+  get "about", to: "pages#about"
   get "about/team", to: "pages#team"
   get "about/technology", to: "pages#technology"
 

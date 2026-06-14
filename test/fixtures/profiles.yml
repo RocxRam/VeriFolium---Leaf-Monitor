@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  land_size: 9.99
+  crops: MyText
+  soil_type: MyString
+  location: MyString
+
+two:
+  user: two
+  land_size: 9.99
+  crops: MyText
+  soil_type: MyString
+  location: MyString

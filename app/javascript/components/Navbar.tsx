@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
-import { root_path, about_path, about_team_path, about_technology_path, login_path, logout_path, signup_path } from '@/routes'
+import { root_path, about_path, about_team_path, about_technology_path, login_path, logout_path, signup_path, dashboard_path } from '@/routes'
 
 interface NavbarProps {
   title?: string
@@ -41,7 +41,7 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
               Technology
             </Link>
             {auth.user && (
-              <Link href="/dashboard" className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
+              <Link href={dashboard_path()} className="text-neutral-600 hover:text-primary-600 no-underline font-medium transition-colors">
                 Dashboard
               </Link>
             )}
@@ -116,7 +116,7 @@ export default function Navbar({ title = 'VeriFolium' }: NavbarProps) {
               {auth.user && (
                 <>
                   <Link
-                    href="/dashboard"
+                    href={dashboard_path()}
                     className="block px-4 py-2 text-neutral-600 hover:bg-neutral-100 rounded-lg no-underline"
                     onClick={() => setMobileMenuOpen(false)}
                   >

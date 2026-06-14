@@ -8,10 +8,6 @@ class PagesController < InertiaController
     render inertia: "Pages/About"
   end
 
-  def home
-    render inertia: "Pages/Home"
-  end
-
   def team
     render inertia: "Pages/Team"
   end

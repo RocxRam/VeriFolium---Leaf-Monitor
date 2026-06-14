@@ -10,9 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_13_092400) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_14_011056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "profiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "crops"
+    t.decimal "land_size", precision: 10, scale: 2
+    t.string "location"
+    t.string "soil_type"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -31,5 +42,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_092400) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
+  add_foreign_key "profiles", "users"
   add_foreign_key "sessions", "users"
 end
